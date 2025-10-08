@@ -1,6 +1,7 @@
-# Un grafo tiene como atributos un conjunto de nodos y un conjunto de 
+# Un digrafo tiene como atributos un conjunto de vertices y un conjunto de 
 # aristas que los unen. Pero a demas existe una funcion de 
-# incidencia asigna a cada par de vertices, al menos una arista.
+# incidencia asigna a cada par de vertices, al menos una arista, o tambien se puede decir
+# que a una arista se le asigna un par ordenado de vertices.
 
 class Digrafo:
     def __init__(self):
@@ -31,26 +32,31 @@ class Digrafo:
     # la funcion de incidencia, que hace corresponder a cada arista un par de vertices.
     def agregar_arista(self):
         while True:
-            u = input("Ingrese el vertice inicial de la arista (o 'salir' para terminar): ")
+            u = input("Ingrese el vértice inicial de la arista (o 'salir' para terminar): ")
             if u.lower() == 'salir':
                 break
-            v = input("Ingrese el vertice final de la arista: ")
+            v = input("Ingrese el vértice final de la arista: ")
             if u in self.vertices and v in self.vertices:
+                peso = int(input("Ingrese el peso de la arista: "))
                 self.aristas.append((u, v))
-                peso = float(input("Ingrese el peso de la arista: "))
-                self.pesos[(u, v)] = peso
-                print(self.aristas)
-                print(self.pesos)
-                return self.aristas, self.pesos
+
+                # Agregar el peso a la lista correspondiente en el diccionario
+                if (u, v) in self.pesos:
+                    self.pesos[(u, v)].append(peso)
+                else:
+                    self.pesos[(u, v)] = [peso]
+
+                print("Aristas actuales:", self.aristas)
+                print("Pesos actuales:", self.pesos)
             else:
-                print("Uno o ambos vertices no existen. Por favor, agreguelos primero.")
+                print("Uno o ambos vértices no existen. Por favor, agréguelos primero.")
+        return self.aristas, self.pesos
+
             
 
 if __name__ == "__main__":
     d = Digrafo()
     d.agregar_vertice()
     d.agregar_arista()
-    d.print("Vertices del grafo:", d.vertices)
-    d.print("Aristas del grafo:", d.aristas)
-    d.print("Pesos de las aristas:", d.pesos)
+    
     
