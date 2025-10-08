@@ -2,7 +2,7 @@
 # aristas que los unen. Pero a demas existe una funcion de 
 # incidencia asigna a cada par de vertices, al menos una arista.
 
-class Grafo:
+class Digrafo:
     def __init__(self):
         self.vertices = []
         self.aristas = []
@@ -25,7 +25,10 @@ class Grafo:
         
         print(self.vertices)
         return self.vertices
-    # Funcion para agregar aristas a el array de aristas
+    
+    
+    # Funcion para agregar aristas a el array de aristas con su respectivo peso, y ademas se esta aplicando 
+    # la funcion de incidencia, que hace corresponder a cada arista un par de vertices.
     def agregar_arista(self):
         while True:
             u = input("Ingrese el vertice inicial de la arista (o 'salir' para terminar): ")
@@ -38,11 +41,16 @@ class Grafo:
                 self.pesos[(u, v)] = peso
                 print(self.aristas)
                 print(self.pesos)
+                return self.aristas, self.pesos
             else:
                 print("Uno o ambos vertices no existen. Por favor, agreguelos primero.")
+            
 
 if __name__ == "__main__":
-    g = Grafo()
-    g.agregar_vertice()
-    g.agregar_arista()
+    d = Digrafo()
+    d.agregar_vertice()
+    d.agregar_arista()
+    d.print("Vertices del grafo:", d.vertices)
+    d.print("Aristas del grafo:", d.aristas)
+    d.print("Pesos de las aristas:", d.pesos)
     
