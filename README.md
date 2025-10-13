@@ -26,13 +26,13 @@ cargo de la asignatura.
 Realice un programa que contenga un menú de opciones, las cuales
 permitirán:
 
-a)**Establecer el recorrido en anchura (BFS)**. Muestre cómo queda el árbol recubridor. Para esta opción debe considerar: el vértice inicial, árbol raíz al vértice A, las adyacencias para cada uno de los vértices establecidos, visualizar los hijos de la raíz.
+a) **Establecer el recorrido en anchura (BFS)**. Muestre cómo queda el árbol recubridor. Para esta opción debe considerar: el vértice inicial, árbol raíz al vértice A, las adyacencias para cada uno de los vértices establecidos, visualizar los hijos de la raíz.
 
-b)**Establecer el recorrido de búsqueda en profundidad (DFS) de este grafo comenzando desde el vértice A.** Muestre cómo queda el árbol recubridor estableciendo orden fijo y las adyacencias de cada uno de los vértices.
+b) **Establecer el recorrido de búsqueda en profundidad (DFS) de este grafo comenzando desde el vértice A.** Muestre cómo queda el árbol recubridor estableciendo orden fijo y las adyacencias de cada uno de los vértices.
 
-c)**Establecer el árbol generador de mínimo peso del grafo dado aplicando el algoritmo de Kruskal**. Muestre el árbol generador con los pesos asignados en cada una de las adyacencias preestablecidas con anterioridad.
+c) **Establecer el árbol generador de mínimo peso del grafo dado aplicando el algoritmo de Kruskal**. Muestre el árbol generador con los pesos asignados en cada una de las adyacencias preestablecidas con anterioridad.
 
-d)**Establecer el árbol generador de mínimo peso, utilizando el algoritmo Prim.** Considerando como vértice inicial A. Ilustrar el árbol recubridor óptimo bajo las condiciones establecidas en la figura ilustrada.
+d) **Establecer el árbol generador de mínimo peso, utilizando el algoritmo Prim.** Considerando como vértice inicial A. Ilustrar el árbol recubridor óptimo bajo las condiciones establecidas en la figura ilustrada.
 
 ## Consideraciones finales: 
 
