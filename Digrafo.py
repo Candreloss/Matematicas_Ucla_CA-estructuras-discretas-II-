@@ -1,13 +1,105 @@
-# Un digrafo tiene como atributos un conjunto de vertices y un conjunto de 
-# aristas que los unen. Pero a demas existe una funcion de 
-# incidencia asigna a cada par de vertices, al menos una arista, o tambien se puede decir
-# que a una arista se le asigna un par ordenado de vertices.
+import networkx as nx
+import matplotlib.pyplot as mat
 
-class Digrafo:
+vertices = ['A', 'B', 'C', 'E', 'D', 'F', 'G', 'H',  'I', 'K', 'L', 'M', 'N', 'P']
+
+def agregar_vertice (G, vertices):
+        G.add_nodes_from(vertices)
+
+def agregar_arista(G, u, v, p=0):
+    G.add_edge(u, v, peso=p)
+
+
+if __name__ == '__main__':
+    G = nx.Graph()
+    agregar_vertice(G, vertices)
+    agregar_arista(G, "A", "B", 8)
+    agregar_arista(G, "A", "D", 5)
+    agregar_arista(G, "A", "E", 4)
+    agregar_arista(G, "B", "C", 3)
+    agregar_arista(G, "B", "F", 4)
+    agregar_arista(G, "B", "E", 4)
+    agregar_arista(G, "C", "F", 6)
+    agregar_arista(G, "C", "G", 7)
+    agregar_arista(G, "D", "E", 1)
+    agregar_arista(G, "D", "I", 2)
+    agregar_arista(G, "D", "H", 3)
+    agregar_arista(G, "E", "F", 3)
+    agregar_arista(G, "E", "I", 2)
+    agregar_arista(G, "F", "G", 1)
+    agregar_arista(G, "F", "K", 14)
+    agregar_arista(G, "F", "I", 3)
+    agregar_arista(G, "G", "K", 2)
+    agregar_arista(G, "G", "L", 3)
+    agregar_arista(G, "H", "I", 11)
+    agregar_arista(G, "H", "M", 6)
+    agregar_arista(G, "I", "K", 6)
+    agregar_arista(G, "I", "P", 15)
+    agregar_arista(G, "I", "N", 2)
+    agregar_arista(G, "I", "M", 5)
+    agregar_arista(G, "K", "L", 8)
+    agregar_arista(G, "K", "P", 3)
+    agregar_arista(G, "L", "P", 6)
+    agregar_arista(G, "M", "N", 1)
+    agregar_arista(G, "N", "P", 13)
+    print(G.number_of_nodes())
+    print(G.number_of_edges())
+    """e= str(input('Ingrese el nombre del vertice a agregar:'))
+    if e in list(G.nodes):
+        print("Este vértice ya existe en el grafo")
+    else:
+        print("Agregado con éxito")
+        agregar_vertice(G, e)
+        print(list(G.nodes))"""
+    pos = nx.spring_layout(G, seed=100, k=0.5, iterations=100)
+    nx.draw_networkx(G, pos)
+    labels = nx.get_edge_attributes(G, 'peso')
+    nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
+    mat.title("Grafo con NetworkX")
+    mat.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"""
+
+class Grafo:
     def __init__(self):
-        self.vertices = []
-        self.aristas = []
-        self.pesos = {} 
+        self.vertices = ['A', 'B', 'C', 'E', 'D', 'F', 'G', 'H',  'I', 'K', 'L', 'M', 'N', 'P']
+        self.aristas =[]
+        self.pesos = {('A', 'B'): 8, ("A", "D"): 5, ("A", "E"): 4, ("B", "C"):3, ("B", "F"): 4, ("B", "E"): 4, ("C", "F"):6   } 
         # Los pesos estan en un diccionario con tuplas (u,v) como llaves 
         # del diccionario, ahora, es un diccionario por que para asignarle 
         # el peso de una arista, la misma debe asociarse a dos vertices 
@@ -55,8 +147,10 @@ class Digrafo:
             
 
 if __name__ == "__main__":
-    d = Digrafo()
-    d.agregar_vertice()
-    d.agregar_arista()
-    
-    
+    d = Grafo()
+    G = nx.Graph()
+    G.add_nodes_from(["1", "2", "3"])
+    G.add_edges_from([(1, 2), (1, 3)])
+    print(G.adj)
+
+"""
