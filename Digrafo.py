@@ -27,7 +27,9 @@ class Digrafo:
         print(self.vertices)
         return self.vertices
     
-    
+    #Angel
+
+
     # Funcion para agregar aristas a el array de aristas con su respectivo peso, y ademas se esta aplicando 
     # la funcion de incidencia, que hace corresponder a cada arista un par de vertices.
     def agregar_arista(self):
