@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 customtkinter==5.2.2
 networkx==3.5
 numpy==2.2.6
+=======
+customtkinter==5.2.2
+networkx==3.5
+numpy==2.2.6
+>>>>>>> 99516dfa8735a803a0692eeb9dba963e4271e623
 pip==25.2
