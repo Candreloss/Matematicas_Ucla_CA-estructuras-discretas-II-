@@ -1,64 +1,47 @@
-# Un digrafo tiene como atributos un conjunto de vertices y un conjunto de 
-# aristas que los unen. Pero a demas existe una funcion de 
-# incidencia asigna a cada par de vertices, al menos una arista, o tambien se puede decir
-# que a una arista se le asigna un par ordenado de vertices.
+import networkx as nx
+import matplotlib.pyplot as plt
 
-class Digrafo:
-    def __init__(self):
-        self.vertices = []
-        self.aristas = []
-        self.pesos = {} 
+class Grafo:
+    def __init__(self, di=False):
+        if di:
+            self.G= nx.Digraph()
+        else:
+            self.G= nx.Graph()
+        self.vertice = ['A', 'B', 'C', 'E', 'D', 'F', 'G', 'H',  'I', 'K', 'L', 'M', 'N', 'P']
+        self.peso = [("A", "B", 8), ("A", "D", 5), ("A", "E", 4), ("B", "C", 3), ("B", "F", 4), ("B", "E", 4), ("C", "F", 6), ("C", "G", 7), ("D", "E", 1), ("D", "I", 2), ("D", "H", 3), ("E", "F", 3), ("E", "I", 2), ("F", "G", 1), ("F", "K", 14), ("F", "I", 3), ("G", "K", 2), ("G", "L", 3), ("H", "I", 11), ("H", "M", 6), ("I", "K", 6), ("I", "P", 15), ("I", "N", 2), ("I", "M", 5), ("K", "L", 8), ("K", "P", 3), ("L", "P", 6), ("M", "N", 1), ("N", "P", 13)]
+        self.pos= {'A': (0, 0), 'B': (0, 0), 'C': (0, 0), 'E': (0, 0), 'D': (0, 0), 'F': (0, 0), 'G': (0, 0), 'H': (0, 0),  'I': (0, 0), 'K': (0, 0), 'L': (0, 0), 'M': (0, 0), 'N': (0, 0), 'P': (0, 0)}
+        self.G.add_nodes_from(self.vertice)
+        self.G.add_weighted_edges_from(self.peso)
         # Los pesos estan en un diccionario con tuplas (u,v) como llaves 
         # del diccionario, ahora, es un diccionario por que para asignarle 
         # el peso de una arista, la misma debe asociarse a dos vertices 
         # "inicial y final". Mientras que los vertices y aristas son 
         # listas, por que solo se necesita almacenar los elementos.
-        
-    # Funcion para agregar vertices a el array de vertices
-    def agregar_vertice(self): 
-        numVertices = int(input("Ingrese el numero de vertices que desea agregar: "))
-        for i in range(numVertices):
-            v = input("Ingrese el nombre del vertice: ")
-            if v not in self.vertices:
-                self.vertices.append(v)
-            else:
-                print("El vertice ya existe")
-        
-        print(self.vertices)
-        return self.vertices
     
-    #Angel
+def agregar_vertice (G, vertice):
+        G.add_nodes_from(vertice)
 
-
-    # Funcion para agregar aristas a el array de aristas con su respectivo peso, y ademas se esta aplicando 
-    # la funcion de incidencia, que hace corresponder a cada arista un par de vertices.
-    def agregar_arista(self):
-        while True:
-            u = input("Ingrese el vértice inicial de la arista (o 'salir' para terminar): ")
-            if u.lower() == 'salir':
-                break
-            v = input("Ingrese el vértice final de la arista: ")
-            if u in self.vertices and v in self.vertices:
-                peso = int(input("Ingrese el peso de la arista: "))
-                self.aristas.append((u, v))
-
-                # Agregar el peso a la lista correspondiente en el diccionario
-                if (u, v) in self.pesos:
-                    self.pesos[(u, v)].append(peso)
-                else:
-                    self.pesos[(u, v)] = [peso]
-
-                print("Aristas actuales:", self.aristas)
-                print("Pesos actuales:", self.pesos)
-            else:
-                print("Uno o ambos vértices no existen. Por favor, agréguelos primero.")
-        return self.aristas, self.pesos
-
-            
+def agregar_arista(G, u, v, p=0):
+    G.add_edge(u, v, peso=p)
 
 if __name__ == "__main__":
-    d = Digrafo()
-    d.agregar_vertice()
-    d.agregar_arista()
-    
-    
+    grafo = Grafo()
+   
+    pos = nx.spring_layout(grafo.G, seed=100, k=0.5, iterations=100)
+        
+    plt.figure(figsize=(10,6))
+    nx.draw(
+            grafo.G, 
+            pos=pos, 
+            with_labels=True, 
+            node_color="skyblue", 
+            node_size=1200, 
+            font_weight="bold"
+        )
+        
+        # Mostrar los pesos de las aristas
+    labels = nx.get_edge_attributes(grafo.G, 'weight')  # ojo, es 'weight'
+    nx.draw_networkx_edge_labels(grafo.G, pos, edge_labels=labels)
+        
+    plt.title("Grafo con NetworkX")
+    plt.show()

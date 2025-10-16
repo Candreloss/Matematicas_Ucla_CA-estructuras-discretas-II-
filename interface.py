@@ -12,8 +12,8 @@ style.theme_use("clam")
 
 #Implementación de los estilos de la interfaz
 
-style.configure("label_title.TLabel", background="#17738F", foreground="#E7E7E7", relief=tk.FLAT, font=("Forte", 20, ), anchor="center")
-style.configure("bfs.TButton", background="#17738F", foreground="#ffffff", relief=tk.FLAT, font=("Tahoma", 8, ))
+style.configure("label_title.TLabel", background="#666666", foreground="#E7E7E7", relief=tk.FLAT, font=("Forte", 20, ), anchor="center")
+style.configure("bfs.TButton", background="#255255", foreground="#ffffff", relief=tk.FLAT, font=("Tahoma", 8, ))
 style.map("bfs.TButton", background=[("active", "#8585f7")], foreground=[("active", "#ffffff")])
 style.configure("dfs.TButton", background="#17738F", foreground="#ffffff", relief=tk.FLAT, font=("Tahoma", 8, ))
 style.map("dfs.TButton", background=[("active", "#8585f7")], foreground=[("active", "#ffffff")])
