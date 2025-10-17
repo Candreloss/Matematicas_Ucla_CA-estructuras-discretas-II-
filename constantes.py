@@ -7,7 +7,7 @@ NEGRO = ("#000000")
 GRIS = ("#666666")
 
 #Tipografias
-verdanaCursivaN = ("Recursos/verdanaz.ttf", 20, )
+verdanaCursivaN = ("Recursos/verdanaz.ttf", )
 verdanaCursiva = ("Recursos/verdanai.ttf", )
 verdanaNegra = ("Recursos/verdanab.ttf", )
 verdanaN = ("Recursos/verdanab.ttf", )
