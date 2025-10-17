@@ -7,16 +7,14 @@ from matplotlib.figure import Figure # Importamos Figure para usarla explícitam
 # que a una arista se le asigna un par ordenado de vertices.
 
 class Grafo:
-    def __init__(self, di=False):
-        if di:
-            self.G= nx.Digraph()
-        else:
-            self.G= nx.Graph()
+    def __init__(self):
+        
+        self.G= nx.Graph()
         self.vertice = ['A', 'B', 'C', 'E', 'D', 'F', 'G', 'H',  'I', 'K', 'L', 'M', 'N', 'P']
         self.peso = [("A", "B", 8), ("A", "D", 5), ("A", "E", 4), ("B", "C", 3), ("B", "F", 4), ("B", "E", 4), ("C", "F", 6), ("C", "G", 7), ("D", "E", 1), ("D", "I", 2), ("D", "H", 3), ("E", "F", 3), ("E", "I", 2), ("F", "G", 1), ("F", "K", 14), ("F", "I", 3), ("G", "K", 2), ("G", "L", 3), ("H", "I", 11), ("H", "M", 6), ("I", "K", 6), ("I", "P", 15), ("I", "N", 2), ("I", "M", 5), ("K", "L", 8), ("K", "P", 3), ("L", "P", 6), ("M", "N", 1), ("N", "P", 13)]
         self.pos= {'A': (-100, 150),'B': (10, 225), 'C': (80, 305), 'D': (-15, 50), 'E': (85, 150), 'F': (160, 225), 'G': (230, 305), 'H': (141.26, 10), 'I': (300, 100), 'K': (310, 225), 'L': (380, 305), 'M': (280, 20), 'N': (450, 80), 'P': (460, 225) }
         self.G.add_nodes_from(self.vertice)
-        self.G.add_weighted_edges_from(self.peso)
+        self.G.add_weighted_edges_from([(u, v, p) for (u, v, p) in self.peso])
         # Los pesos estan en un diccionario con tuplas (u,v) como llaves 
         # del diccionario, ahora, es un diccionario por que para asignarle 
         # el peso de una arista, la misma debe asociarse a dos vertices 
@@ -25,7 +23,7 @@ class Grafo:
     
     # --- NUEVO MÉTODO PARA GENERAR LA FIGURA ---
     def generar_figura_matplotlib(self):
-            grafo= Grafo()
+            grafo= self
             # Creamos una figura de Matplotlib (no usamos plt.figure() directamente)
             fig = Figure(figsize=(4.6, 3.4), dpi=100) # El figsize se ajusta al tamaño de tu frame (460x344 / 100 dpi)
             ax = fig.add_subplot(111) # Añadimos un sub-gráfico
@@ -55,11 +53,16 @@ class Grafo:
             # Devolvemos el objeto Figure
             return fig
     
-    def agregar_vertice (G, vertice):
-            G.add_nodes_from(vertice)
+    def agregar_vertice (self, vertice, pos=None):
+        self.G.add_node(vertice)
+        self.vertice.append(vertice)
+        if pos:
+             self.pos[vertice]= pos
 
-    def agregar_arista(G, u, v, p=0):
-        G.add_edge(u, v, peso=p)
+
+    def agregar_arista(self, u, v, p=0):
+        self.G.add_edge(u, v, weight=p)
+        self.peso.append((u, v, p))
 """"
 def agregar_vertice(self, vertice): # Cambiado para ser método de instancia
         self.G.add_nodes_from(vertice)
