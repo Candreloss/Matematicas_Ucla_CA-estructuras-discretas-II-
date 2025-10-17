@@ -38,7 +38,7 @@ class Grafo:
                 pos=grafo.pos, 
                 ax=ax, # ¡Importante! Dibujar en el sub-gráfico 'ax'
                 with_labels=True, 
-                node_color="#8585f7", # Color azul que se acerca a tu esquema
+                node_color="#8585f7", # Color azul que se acerca al esquema
                 node_size=300, 
                 font_size=8,
                 font_weight="bold",

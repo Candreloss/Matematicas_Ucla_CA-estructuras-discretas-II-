@@ -23,7 +23,7 @@ style.theme_use("clam")
 
 style.configure("label_title.TLabel", background=constantes.AZULP, foreground="#FFFFFF", relief=tk.FLAT, font= verdanaCursivaN)
 style.configure("org.TButton", background="#2f2978", foreground="#FFFFFF", relief=tk.FLAT, font=("Verdana", 12, "bold" ))
-style.map("org.TButton", background=[("active", "#38A4DD")], foreground=[("active", "#FFFFFF")])
+style.map("org.TButton", background=[("active", "#38A4DD")], foreground=[("active", "#2f2978")])
 style.configure("bfs.TButton", background="#2f2978", foreground="#ffffff", relief=tk.FLAT, font=verdanaNegra)
 style.map("bfs.TButton", background=[("active", "#38A4DD")], foreground=[("active", "#2f2978")])
 style.configure("dfs.TButton", background="#2f2978", foreground="#ffffff", relief=tk.FLAT, font=verdanaNegra)
@@ -34,7 +34,6 @@ style.configure("prim.TButton", background="#2f2978", foreground="#FFFFFF", reli
 style.map("prim.TButton", background=[("active", "#38A4DD")], foreground=[("active", "#2f2978")])
 style.configure("integrantes.TButton", background="#38A4DD", foreground="#2f2978", relief=tk.FLAT, font=verdanaNegra)
 style.map("integrantes.TButton", background=[("active", "#C4C5E5")], foreground=[("active", "#2f2978")])
-
 
 # Título
 
@@ -52,16 +51,14 @@ frame_menu = tk.Frame(master=app)
 frame_menu.config(bg="#C4C5E5")
 frame_menu.place(x=20, y=75, width=270, height=400)
 
-org = ttk.Button(master=frame_menu, text="Grafo", style="bfs.TButton")
+org = ttk.Button(master=frame_menu, text="Grafo de la Red", style="bfs.TButton")
 org.place(x= 0, y=0, width=270, height=60)
 
 bfs = ttk.Button(master=frame_menu, text="Recorrido de anchura (BFS)", style="bfs.TButton")
 bfs.place(x=0, y=85, width=270, height=60)
 
-
 dfs = ttk.Button(master=frame_menu, text="Recorrido de búsqueda\n en profundidad (DFS)", style="dfs.TButton")
 dfs.place(x=0, y=170, width=270, height=60)
-
 
 kruskal = ttk.Button(master=frame_menu, text=" Árbol generador de mínimo\npeso (Por medio de Kruskal)", style="kruskal.TButton")
 kruskal.place(x=0, y=255, width=270, height=60)
@@ -115,5 +112,5 @@ integrantes = ttk.Button(master=frame_footer, text="👤", style="integrantes.TB
 
 integrantes.place(x=750, y=5, width=40, height=40)
 
-
+#No tocar please
 app.mainloop()
