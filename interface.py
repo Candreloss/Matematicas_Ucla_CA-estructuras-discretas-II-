@@ -5,7 +5,7 @@ import constantes
 from Modelo_Grafo import Grafo
 
 # --- NUEVAS IMPORTACIONES DE MATPLOTLIB ---
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg #, NavigationToolbar2Tk  Opcional barra herramientas
 # ------------------------------------------
 
 # Incialización del programa, configuración y personalización de las características de la ventana principal
@@ -19,17 +19,18 @@ style = ttk.Style(app)
 style.theme_use("clam")
 
 # Implementación de los estilos de la interfaz
+# ... (El código de estilos, se mantiene igual)
 
 style.configure("label_title.TLabel", background=constantes.AZULP, foreground="#FFFFFF", relief=tk.FLAT, font= verdanaCursivaN)
-style.configure("org.TButton", background="#2f2978", foreground="#ffffff", relief=tk.FLAT, font=("Verdana", 12, "bold" ))
-style.map("org.TButton", background=[("active", "#38A4DD")], foreground=[("active", "#ffffff")])
+style.configure("org.TButton", background="#2f2978", foreground="#FFFFFF", relief=tk.FLAT, font=("Verdana", 12, "bold" ))
+style.map("org.TButton", background=[("active", "#38A4DD")], foreground=[("active", "#FFFFFF")])
 style.configure("bfs.TButton", background="#2f2978", foreground="#ffffff", relief=tk.FLAT, font=verdanaNegra)
-style.map("bfs.TButton", background=[("active", "#38A4DD")], foreground=[("active", "#ffffff")])
+style.map("bfs.TButton", background=[("active", "#38A4DD")], foreground=[("active", "#2f2978")])
 style.configure("dfs.TButton", background="#2f2978", foreground="#ffffff", relief=tk.FLAT, font=verdanaNegra)
-style.map("dfs.TButton", background=[("active", "#38A4DD")], foreground=[("active", "#ffffff")])
-style.configure("kruskal.TButton", background="#2f2978", foreground="#ffffff", relief=tk.FLAT, font=verdanaNegra)
-style.map("kruskal.TButton", background=[("active", "#38A4DD")], foreground=[("active", "#ffffff")])
-style.configure("prim.TButton", background="#2f2978", foreground="#ffffff", relief=tk.FLAT, font=verdanaNegra)
+style.map("dfs.TButton", background=[("active", "#38A4DD")], foreground=[("active", "#2f2978")])
+style.configure("kruskal.TButton", background="#2f2978", foreground="#FFFFFF", relief=tk.FLAT, font=verdanaNegra)
+style.map("kruskal.TButton", background=[("active", "#38A4DD")], foreground=[("active", "#2f2978")])
+style.configure("prim.TButton", background="#2f2978", foreground="#FFFFFF", relief=tk.FLAT, font=verdanaNegra)
 style.map("prim.TButton", background=[("active", "#38A4DD")], foreground=[("active", "#2f2978")])
 style.configure("integrantes.TButton", background="#38A4DD", foreground="#2f2978", relief=tk.FLAT, font=verdanaNegra)
 style.map("integrantes.TButton", background=[("active", "#C4C5E5")], foreground=[("active", "#2f2978")])
@@ -62,10 +63,10 @@ dfs = ttk.Button(master=frame_menu, text="Recorrido de búsqueda\n en profundida
 dfs.place(x=0, y=170, width=270, height=60)
 
 
-kruskal = ttk.Button(master=frame_menu, text="Árbol generador de mínimo\n peso (Por medio de Kruskal)", style="kruskal.TButton")
+kruskal = ttk.Button(master=frame_menu, text=" Árbol generador de mínimo\npeso (Por medio de Kruskal)", style="kruskal.TButton")
 kruskal.place(x=0, y=255, width=270, height=60)
 
-prim = ttk.Button(master=frame_menu, text="Árbol generador de mínimo\n peso (Por medio de Prim)", style="prim.TButton")
+prim = ttk.Button(master=frame_menu, text="Árbol generador de mínimo\n  peso (Por medio de Prim)", style="prim.TButton")
 prim.place(x=0, y=340, width=270, height=60)
 
 # Área del grafo
@@ -78,7 +79,7 @@ frame_grafo.place(x=310, y=90, width=470, height=370)
 
 frame_grafo = tk.Frame(master=app)
 frame_grafo.config(bg="#e2e2e2")
-frame_grafo.place(x=311, y=96, width=460, height=344)
+frame_grafo.place(x=310, y=90, width=470, height=370)
 
 
 # --- CÓDIGO PARA INSERTAR LA GRÁFICA ---
@@ -96,12 +97,13 @@ canvas.draw()
 widget_grafo = canvas.get_tk_widget()
 widget_grafo.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
 
+"""""
 # Opcional: Agregar la barra de herramientas de navegación
 toolbar = NavigationToolbar2Tk(canvas, frame_grafo)
 toolbar.update()
 widget_grafo.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
 # ---------------------------------------
-
+"""""
 
 # Footer
 
