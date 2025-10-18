@@ -1,10 +1,8 @@
 # Importación de las librerías
 import tkinter as tk # Librería de interfaz
 from tkinter import ttk # Librería de interfaz
-<<<<<<< HEAD
 from tkinter import messagebox
-=======
->>>>>>> a33485c059d941dcef3d206806fe6e9c993d71cd
+
 import constantes # Librería con datos de diseño
 from Modelo_Grafo import Grafo # Modelo del grafo
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk #Librería Matplotlib
@@ -46,7 +44,7 @@ def mostrar_grafo():
     toolbar.update()
     widget_grafo.pack(side=tk.TOP, fill=tk.BOTH, expand=1)"""
 
-<<<<<<< HEAD
+
 def mostrar_kruskal():
     try:
         figura_kruskal = grafo_instance.generar_figura_kruskal()
@@ -59,8 +57,7 @@ def mostrar_kruskal():
     except Exception as e:
         messagebox.showerror("Error", str(e))
 
-=======
->>>>>>> a33485c059d941dcef3d206806fe6e9c993d71cd
+
 def modificar_grafo():
     #Limpiamos el lienzo, por si hay otro contenido presente.
     for widget in frame_grafo.winfo_children():
@@ -306,11 +303,11 @@ dfs = ttk.Button(master=frame_menu, text="Recorrido de búsqueda\n en profundida
 dfs.place(x=0, y=170, width=270, height=60)
 
 
-<<<<<<< HEAD
+
 kruskal = ttk.Button(master=frame_menu, text="Árbol generador de mínimo\n peso (Por medio de Kruskal)", style="kruskal.TButton", command=mostrar_kruskal)
-=======
+
 kruskal = ttk.Button(master=frame_menu, text="Árbol generador de mínimo\n peso (Por medio de Kruskal)", style="kruskal.TButton")
->>>>>>> a33485c059d941dcef3d206806fe6e9c993d71cd
+
 kruskal.place(x=0, y=255, width=270, height=60)
 
 prim = ttk.Button(master=frame_menu, text="Árbol generador de mínimo\n peso (Por medio de Prim)", style="prim.TButton")
@@ -341,8 +338,8 @@ integrantes = ttk.Button(master=frame_footer, text="👤", style="integrantes.TB
 integrantes.place(x=750, y=5, width=40, height=40)
 
 mostrar_grafo()
-<<<<<<< HEAD
+
 app.mainloop()
-=======
+
 app.mainloop()
->>>>>>> a33485c059d941dcef3d206806fe6e9c993d71cd
+
