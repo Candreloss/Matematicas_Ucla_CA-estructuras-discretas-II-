@@ -1,14 +1,6 @@
-from Digrafo import Grafo
-
-# Implementar un clase Grafo donde los vértices es un conjunto y las aristas es un conjunto de 2-subconjuntos de vértices.
-# Los 2-subconjuntos se implementan con frozenset({v, w}) si v, w vértices (pues Python no admite conjuntos de conjuntos)
-# Las funciones y métodos son los obvios. Si G es grafo:
-#     G.vertices(): es el conjunto de vértices
-#     G.aristas(): es el conjunto de aristas
-#     G.adyacentes(v): es el conjunto de vértices adyacentes a un vértice v
-#     G.agregar_arista(e): agrega la arista e
-
-# vi = vertice inicial
+from Modelo_Grafo import Grafo
+import matplotlib.pyplot as plt
+from matplotlib.figure import Figure
 
 """
 ['A', 'B', 'C', 'E', 'D', 'F', 'G', 'H',  'I', 'K', 'L', 'M', 'N', 'P']
@@ -51,36 +43,71 @@ def prim(G, vi):
 
 
 #Sin matriz de adyacencia
-def prim(G, vi):
-    visitados = []
-    pesos = [[(a[0],a[1]): a[2]] for a in G.pesos]
-    INFINITO = 10 * max(pesos)
+def prim(G, vi): #La funcion toma como argumentos un grafo y un vertice
+    pesos = nx.get_edge_attributes(G,"weight")
+    """crea un diccionario usando como clave las aristas, definidas como tuplas, y como valores sus respectivos pesos"""
+    
+    #pesos = [[(a[0],a[1]): a[2]] for a in G.pesos]
+    
+    INFINITO = 10 * max(pesos.values()) # infinito es un numero mas grande que el mayor peso de las aristas
     cola, anterior = {}, {}
-    for v in G.vertice:
+    """Crea dos diccionarios: una cola de prioridades y otro que define que vertice antecede a quien"""
+    
+    for v in G.vertice: # Inicializa la cola de prioridad y el diccinario de vertices respectivamente
         cola[u] = INFINITO
-        anterior[u] = None
-    cola[vi] = 0
-    porVisitar = G.vertice
-    while porVisitar != set({}):
-        u = min([cola[v],v for v in porVisitar])[1]
-        porVisitar.remove(u)
-        for v in G.vAdyacentes(u):
-            e = (u,v)
-            if v in porVisitar and pesos[e] < cola[e]:
-                anterior[u] = v
-                cola[e] = pesos[e]
-    arbol = Grafo()
-    aristasArbol = [(v,anterior[v]) for v in G.vertice]
+        vecino[u] = None
+    
+    cola[vi] = 0 # Asigna la maxima prioridad al vertice inicial
+    porVisitar = G.vertice # Crea una lista con todos los vertices del grafo
+
+    while porVisitar != list([]):
+        u = min([[cola[v],v] for v in porVisitar])[1]
+        # u es el vertice con mayor prioridad (con el valor de cola minimo)
+        porVisitar.remove(u) # Elimina el vertice de la lista de vertices por visitar
+        for v in G.vAdyacentes(u): #Recorre todas las aristas adyacentes
+            a = (u,v) 
+            if v in porVisitar and pesos[a] < cola[a]:
+                # Si el vertice no ha sido visitado y tiene menor peso (y por tanto mayor prioridad)
+                vecino[u] = v # el vertice sera vecino
+                cola[a] = pesos[a] # y el peso de la arista sera el menor
+        #Al final queda como vecino el vertice con la arista de menor ponderacion
+    #Se repite con todos los vertices hasta que que no quede ninguno por visitar
+
+    aristasArbol = [(v,vecino[v]) for v in G.vertice]  # Hace una lista de las aristas del grafo
+    
     pesosArbol = []
+    #Crea las aristas ponderadas del arbol
     for a in aristasArbol:
         if a in pesos:
             aristasArbol.append(pesos[a])
         if (a[1],a[0]) in pesos:
             aristasArbol.append(pesos[(a[1]),a[0]]
-    
-    return pesosArbol
+    return pesosArbol #Retorna las aristas del arbol con su ponderacion
 
-        
+
+    def generar_figura_prim(self):
+        """Genera la figura del Árbol de Expansión Mínimo (Prim) para mostrar en Tkinter."""
+        mst = nx.Graph()
+        mst.add_weighted_edges_from(prim(G,vi))
+        pos = nx.spring_layout(mst, seed=42)
+        fig = Figure(figsize=(4.6, 3.4), dpi=100)
+        ax = fig.add_subplot(111)
+
+        nx.draw(
+            mst, pos, ax=ax,
+            with_labels=True,
+            node_color="#80bfff",
+            node_size=500,
+            font_size=9,
+            font_weight="bold"
+        )
+
+        edge_labels = nx.get_edge_attributes(mst, 'weight')
+        nx.draw_networkx_edge_labels(mst, pos, edge_labels=edge_labels, ax=ax)
+        ax.set_title("Árbol de Expansión Mínimo (Prim)")
+        ax.axis("off")
+        return fig
+
 
 """
 def prim(G: Grafo , pesos)
