@@ -1,10 +1,9 @@
 # Importación de las librerías
 import tkinter as tk # Librería de interfaz
 from tkinter import ttk # Librería de interfaz
-from tkinter import messagebox
 import constantes # Librería con datos de diseño
 from Modelo_Grafo import Grafo # Modelo del grafo
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk #Librería Matplotlib
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg #, NavigationToolbar2Tk #Librería Matplotlib
 
 # -----Funciones del programa------------
 
@@ -44,16 +43,83 @@ def mostrar_grafo():
     widget_grafo.pack(side=tk.TOP, fill=tk.BOTH, expand=1)"""
 
 def mostrar_kruskal():
+    #Limpiamos el lienzo, por si hay otro contenido presente.
+    for widget in frame_grafo.winfo_children():
+        widget.destroy()
     try:
-        figura_kruskal = grafo_instance.generar_figura_kruskal()
-        for widget in frame_grafo.winfo_children():
-            widget.destroy()
+        fig = grafo_instance.generar_figura_kruskal()
+        canvas = FigureCanvasTkAgg(fig, master=frame_grafo)
+        canvas.draw()
+        canvas.get_tk_widget().pack(fill="both", expand=True)
+    except RuntimeError as e:
+        tk.messagebox.showerror("Error", str(e))
 
-        canvas_kruskal = FigureCanvasTkAgg(figura_kruskal, master=frame_grafo)
-        canvas_kruskal.draw()
-        canvas_kruskal.get_tk_widget().pack(side="top", fill="both", expand=True)
-    except Exception as e:
-        messagebox.showerror("Error", str(e))
+def mostrar_dfs():
+    # Limpiamos el lienzo, por si hay otro contenido presente.
+    for widget in frame_grafo.winfo_children():
+        widget.destroy()
+
+    # Ejecutar DFS 
+    try:
+        inicio = "A"
+        if inicio not in grafo_instance.G.nodes():
+            inicio = next(iter(grafo_instance.G.nodes()), None)
+
+        if inicio is None:
+            tk.messagebox.showinfo("Info", "El grafo no tiene nodos.")
+            return
+
+        arbol = grafo_instance.dfs(inicio)
+        # Llamamos a la nueva función que dibuja en Tkinter
+        grafo_instance.generar_figura_dfs(arbol, frame_grafo)
+    except RuntimeError as e:
+        tk.messagebox.showerror("Error", str(e))
+
+def mostrar_bfs():
+    # Limpiamos el lienzo, por si hay otro contenido presente
+    for widget in frame_grafo.winfo_children():
+        widget.destroy()
+    try:
+        # Vertice inicial
+        inicio = "A"
+        if inicio not in grafo_instance.G.nodes():
+            inicio = next(iter(grafo_instance.G.nodes()), None)
+
+        if inicio is None:
+            tk.messagebox.showinfo("Info", "El grafo no tiene nodos.")
+            return
+
+        # BFS
+        parent, node_level, tree_edges = grafo_instance.bfs(inicio)
+        # Dibujar el árbol BFS en Tkinter
+        grafo_instance.generar_figura_bfs(tree_edges, node_level, frame_grafo)
+    except RuntimeError as e:
+        tk.messagebox.showerror("Error", str(e))
+
+def mostrar_prim():
+    # Limpiamos el lienzo, por si hay otro contenido presente
+    for widget in frame_grafo.winfo_children():
+        widget.destroy()
+
+    # Vértice inicial
+    inicio = "A"
+    if inicio not in grafo_instance.G.nodes():
+        inicio = next(iter(grafo_instance.G.nodes()), None)
+
+    if inicio is None:
+        tk.messagebox.showinfo("Info", "El grafo no tiene nodos.")
+        return
+
+    try:
+        # Generar figura del árbol de expansión mínima (Prim)
+        fig = grafo_instance.generar_figura_prim(inicio)
+
+        # Mostrar en Tkinter
+        canvas = FigureCanvasTkAgg(fig, master=frame_grafo)
+        canvas.draw()
+        canvas.get_tk_widget().pack(fill="both", expand=True)
+    except RuntimeError as e:
+            tk.messagebox.showerror("Error", str(e))
 
 def modificar_grafo():
     #Limpiamos el lienzo, por si hay otro contenido presente.
@@ -292,18 +358,18 @@ frame_menu.place(x=20, y=75, width=270, height=400)
 grafo = ttk.Button(master=frame_menu, text="Grafo", style="bfs.TButton", command=mostrar_grafo)
 grafo.place(x= 0, y=0, width=270, height=60)
 
-bfs = ttk.Button(master=frame_menu, text="Recorrido de anchura (BFS)", style="bfs.TButton")
+bfs = ttk.Button(master=frame_menu, text="Recorrido de anchura (BFS)", style="bfs.TButton", command=mostrar_bfs)
 bfs.place(x=0, y=85, width=270, height=60)
 
 
-dfs = ttk.Button(master=frame_menu, text="Recorrido de búsqueda\n en profundidad (DFS)", style="dfs.TButton")
+dfs = ttk.Button(master=frame_menu, text="Recorrido de búsqueda\n en profundidad (DFS)", style="dfs.TButton", command=mostrar_dfs)
 dfs.place(x=0, y=170, width=270, height=60)
 
 
 kruskal = ttk.Button(master=frame_menu, text="Árbol generador de mínimo\n peso (Por medio de Kruskal)", style="kruskal.TButton", command=mostrar_kruskal)
 kruskal.place(x=0, y=255, width=270, height=60)
 
-prim = ttk.Button(master=frame_menu, text="Árbol generador de mínimo\n peso (Por medio de Prim)", style="prim.TButton")
+prim = ttk.Button(master=frame_menu, text="Árbol generador de mínimo\n peso (Por medio de Prim)", style="prim.TButton", command=mostrar_prim)
 prim.place(x=0, y=340, width=270, height=60)
 
 # Área del grafo
