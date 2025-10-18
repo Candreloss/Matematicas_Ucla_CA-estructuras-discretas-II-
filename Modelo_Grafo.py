@@ -64,7 +64,6 @@ class Grafo:
         self.G.add_edge(u, v, weight=p)
         self.peso.append((u, v, p))
 
-
     def ordenar_por_peso(self):
         """Devuelve una lista de aristas (u, v, peso) ordenadas por peso ascendente."""
         return sorted([(u, v, d['weight']) for u, v, d in self.G.edges(data=True)], key=lambda x: x[2])
@@ -147,7 +146,6 @@ class Grafo:
         ax.set_title("Árbol de Expansión Mínimo (Kruskal)")
         ax.axis("off")
         return fig
-
 """"
 def agregar_vertice(self, vertice): # Cambiado para ser método de instancia
         self.G.add_nodes_from(vertice)
@@ -178,10 +176,7 @@ if __name__ == "__main__":
     plt.show()    
     
 """
-
-
- 
-
+    
 
 if __name__ == "__main__":
     # La sección __main__ ahora utiliza el nuevo método para probarlo (opcional)
