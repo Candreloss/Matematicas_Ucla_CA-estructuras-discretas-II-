@@ -57,7 +57,7 @@ class Digrafo:
             else:
                 print("Uno o ambos vértices no existen. Por favor, agréguelos primero.")
         return self.aristas, self.pesos
->>>>>>> 99516dfa8735a803a0692eeb9dba963e4271e623
+
 
 class Grafo:
     def __init__(self, di=False):
